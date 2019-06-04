@@ -1,0 +1,7 @@
+---
+extends:
+  - stylelint-config-recess-order
+processors:
+  - '@mapbox/stylelint-processor-arbitrary-tags'
+plugins:
+  - stylelint-scss

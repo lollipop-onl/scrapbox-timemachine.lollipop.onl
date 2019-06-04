@@ -1,0 +1,56 @@
+---
+root: true
+env:
+  es6: true
+  browser: true
+  node: true
+extends:
+  - plugin:vue/recommended
+parser: vue-eslint-parser
+parserOptions:
+  parser: "@typescript-eslint/parser"
+  sourceType: module
+  ecmaFeatures:
+    legacyDecorators: true
+plugins:
+  - "@typescript-eslint"
+rules:
+  # eslint
+  no-console: warn # デバッグするときにうるさいから許可
+  no-throw-literal: error # Errorインスタンス以外のthrowを禁止
+  prefer-object-spread: error # Object.assignより分割代入を推奨する
+  prefer-template: error # 文字列結合よりテンプレートリテラルを推奨する
+  default-case: error # switch文にdefault caseを強制
+  quotes: [error, single] # シングルクォーテーションに統一
+  comma-dangle: [error, never] # ケツカンマを省略
+  semi: [error, always] # セミコロンを強制
+  # @typescript-eslint
+  "@typescript-eslint/class-name-casing": error # クラス名をパスカルケースに強制
+  "@typescript-eslint/interface-name-prefix": "off" # インターフェースのプレフィックスを制限しない
+  "@typescript-eslint/no-inferrable-types": error # 型推論可能な場合は型を書かない
+  "@typescript-eslint/explicit-function-return-type": # 関数の戻り値を明示する
+    - error
+    - allowExpressions: true # コールバックでは許容する
+  # vue-eslint-parser
+  vue/html-closing-bracket-spacing: # />の前にスペースを強制
+    - error
+    - selfClosingTag: always
+  vue/html-self-closing:
+    - error
+    - normal: never
+      void: always
+      component: never
+  vue/attributes-order:
+    - warn
+    - order:
+        - DEFINITION
+        - LIST_RENDERING
+        - CONDITIONALS
+        - RENDER_MODIFIERS
+        - GLOBAL
+        - UNIQUE
+        - TWO_WAY_BINDING
+        - OTHER_DIRECTIVES
+        - OTHER_ATTR
+        - EVENTS
+        - CONTENT
