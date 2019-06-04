@@ -9,7 +9,7 @@
           Edit Source
         </button>
         <div class="version">
-          v1.0.0
+          v{{version}}
         </div>
       </div>
     </div>
@@ -18,9 +18,15 @@
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'vue-property-decorator';
+import packageJson from '../../../package.json';
 
 @Component
 export default class TheNavbar extends Vue {
+  /** バージョン */
+  get version(): string {
+    return packageJson.version;
+  }
+
   @Emit()
   openModal(): void {}
 }

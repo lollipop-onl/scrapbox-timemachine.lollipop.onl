@@ -12,6 +12,7 @@
     "moduleResolution": "node",
     "noImplicitThis": true,
     "paths": {},
+    "resolveJsonModule": true,
     "removeComments": true,
     "sourceMap": true,
     "strictNullChecks": true,

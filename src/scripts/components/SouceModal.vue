@@ -2,7 +2,7 @@
 <div class="source-modal">
   <div class="modal">
     <div class="modal-header">
-      <div class="title">Paste your commit history</div>
+      <div class="title">Enter your commits</div>
       <button
         v-show="commits"
         class="close"
@@ -16,11 +16,20 @@
       >
         Invalid Source
       </p>
+      <a
+        v-show="!value"
+        class="link"
+        href="https://scrapbox.io/help-jp/削除したページの一部を履歴から復活させる"
+        target="_blank"
+        rel="noopener"
+      >
+        How I do to get commits?
+      </a>
     </div>
     <div class="main">
       <textarea
         :class="{'source-field': true, '-correct': !!commits}"
-        placeholder="Paste your commit log"
+        placeholder='{ "commits": [...] }'
         v-model="localValue"
       ></textareaclass="source-field">
     </div>
@@ -39,7 +48,7 @@ export default class SourceModal extends Vue {
   @Model('input', { type: String, required: true })
   value: string;
   /** コミットデータ */
-  @Prop({ type: Object })
+  @Prop({ type: Array })
   commits?: IScrapboxCommit[];
 
   get localValue(): string {
@@ -47,6 +56,8 @@ export default class SourceModal extends Vue {
   }
 
   set localValue(value: string) {
+    console.log('happen');
+    localStorage.setItem('sbtm_source', value);
     this.input(value);
   }
 
@@ -97,6 +108,15 @@ export default class SourceModal extends Vue {
     font-size: 14px
     font-weight: bold
     color: #363c49
+
+  & > .link
+    padding: 0 1em
+    margin: 0 12px 0 auto
+    font-size: 12px
+    color: #39AC86
+
+  & > .link:hover
+    text-decoration: none
 
   & > .error
     margin: 0 12px 0 auto

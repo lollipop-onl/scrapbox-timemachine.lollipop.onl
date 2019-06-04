@@ -49,7 +49,7 @@ import { restorePost } from './utils';
 })
 export default class App extends Vue {
   isShowSourceModal = true;
-  sourceCommits = '';
+  sourceCommits = localStorage.getItem('sbtm_source') || '';
   currentCommit = '';
 
   get commits(): IScrapboxCommit[] | void {
@@ -71,6 +71,10 @@ export default class App extends Vue {
     let texts: {id:string,text:string}[] = [];
 
     return restorePost(this.commits, this.currentCommit);
+  }
+
+  created(): void {
+    this.closeSourceModal();
   }
 
   closeSourceModal(): void {
