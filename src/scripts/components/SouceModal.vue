@@ -56,8 +56,6 @@ export default class SourceModal extends Vue {
   }
 
   set localValue(value: string) {
-    console.log('happen');
-    localStorage.setItem('sbtm_source', value);
     this.input(value);
   }
 

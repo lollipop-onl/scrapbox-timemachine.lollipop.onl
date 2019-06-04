@@ -33,12 +33,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Watch, Vue } from 'vue-property-decorator';
 import TheNavbar from './components/TheNavbar.vue';
 import CommitLog from './components/CommitLog.vue';
 import SourceModal from './components/SouceModal.vue';
 import { IScrapboxCommit } from './types/Scrapbox';
 import { restorePost } from './utils';
+
+const STORAGE_KEY = 'sbtm_source';
 
 @Component({
   components: {
@@ -49,7 +51,7 @@ import { restorePost } from './utils';
 })
 export default class App extends Vue {
   isShowSourceModal = true;
-  sourceCommits = localStorage.getItem('sbtm_source') || '';
+  sourceCommits = localStorage.getItem(STORAGE_KEY) || '';
   currentCommit = '';
 
   get commits(): IScrapboxCommit[] | void {
@@ -71,6 +73,12 @@ export default class App extends Vue {
     let texts: {id:string,text:string}[] = [];
 
     return restorePost(this.commits, this.currentCommit);
+  }
+
+  @Watch('sourceCommits')
+  onChangeSourceCommits(): void {
+    this.currentCommit = '';
+    localStorage.setItem(STORAGE_KEY, this.sourceCommits);
   }
 
   created(): void {
