@@ -23,7 +23,7 @@
         target="_blank"
         rel="noopener"
       >
-        How I do to get commits?
+        How do I get commits?
       </a>
     </div>
     <div class="main">
