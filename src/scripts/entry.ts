@@ -4,7 +4,6 @@ import store from './store/';
 import '../styles/main.sass';
 
 new Vue({
-  el: '#app',
   store,
   render: (h) => h(App)
-});
+}).$mount('#app');

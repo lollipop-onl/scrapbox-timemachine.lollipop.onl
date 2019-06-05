@@ -12,6 +12,8 @@ export const restorePost = (commits: IScrapboxCommit[], commitId?: string): stri
     const { id, changes } = commit;
 
     changes.forEach((change) => {
+      if (!change) return;
+
       if ('title' in change) {
         title = change.title;
 
