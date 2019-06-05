@@ -21,6 +21,16 @@
         ></textareareadonly>
       </div>
     </div>
+    <TheDrawer
+      @open-modal="isShowSourceModal = true"
+    >
+      <CommitLog
+        class="log"
+        v-if="commits"
+        v-model="currentCommit"
+        :commits="commits"
+      ></CommitLog>
+    </TheDrawer>
     <transition name="modal">
       <SourceModal
         v-if="isShowSourceModal"
@@ -35,6 +45,7 @@
 <script lang="ts">
 import { Component, Watch, Vue } from 'vue-property-decorator';
 import TheNavbar from './components/TheNavbar.vue';
+import TheDrawer from './components/TheDrawer.vue';
 import CommitLog from './components/CommitLog.vue';
 import SourceModal from './components/SouceModal.vue';
 import { IScrapboxCommit } from './types/Scrapbox';
@@ -45,6 +56,7 @@ const STORAGE_KEY = 'sbtm_source';
 @Component({
   components: {
     TheNavbar,
+    TheDrawer,
     CommitLog,
     SourceModal
   }
@@ -85,6 +97,20 @@ export default class App extends Vue {
     this.closeSourceModal();
   }
 
+  mounted(): void {
+    this.onResize();
+    window.addEventListener('resize', this.onResize);
+  }
+
+  onResize(): void {
+    const vh = window.innerHeight * 0.01;
+    const { documentElement } = document;
+
+    if (documentElement instanceof HTMLElement) {
+      documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+  }
+
   closeSourceModal(): void {
     if (!this.commits) return;
 
@@ -101,6 +127,7 @@ export default class App extends Vue {
     display: flex
     flex-direction: column
     height: 100vh
+    height: calc(var(--vh, 1vh) * 100)
 
   & > .container
     display: flex
@@ -111,10 +138,16 @@ export default class App extends Vue {
     height: 100%
     margin: 20px auto 0
 
+    @media ($sp)
+      width: calc(100% - 40px)
+
   & > .container > .log
     flex-shrink: 0
     width: 280px
     height: 100%
+
+    @media ($sp)
+      display: none
 
 .scrapbox-preview
   &
@@ -127,6 +160,9 @@ export default class App extends Vue {
     border-top-right-radius: 4px
     border-bottom-left-radius: 3px
     border-bottom-right-radius: 3px
+
+    @media ($sp)
+      margin-left: 0
 
   &::before
     position: absolute
@@ -153,6 +189,7 @@ export default class App extends Vue {
 .modal-enter-active,
 .modal-leave-active
   &
+    z-index: 10
     transition: opacity 0.12s ease
 
 .modal-enter,

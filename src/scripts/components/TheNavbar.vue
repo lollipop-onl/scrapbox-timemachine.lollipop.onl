@@ -50,6 +50,9 @@ export default class TheNavbar extends Vue {
     height: 100%
     margin: 0 auto
 
+    @media ($sp)
+      width: calc(100% - 40px)
+
   & > .container > .logo
     font-size: 15px
     font-weight: bold
@@ -58,6 +61,9 @@ export default class TheNavbar extends Vue {
   &
     display: flex
     align-items: center
+
+    @media ($sp)
+      display: none
 
   & > .menu
     margin-right: 12px
