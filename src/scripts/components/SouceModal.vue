@@ -19,7 +19,7 @@
       <a
         v-show="!value"
         class="link"
-        href="https://scrapbox.io/help-jp/削除したページの一部を履歴から復活させる"
+        href="https://scrapbox.io/simochee-frontend/ページのコミットログを取得する"
         target="_blank"
         rel="noopener"
       >
@@ -34,7 +34,7 @@
       ></textareaclass="source-field">
     </div>
   </div>
-  <div class="background"></div>
+  <div class="background" @click="close"></div>
 </div>
 </template>
 

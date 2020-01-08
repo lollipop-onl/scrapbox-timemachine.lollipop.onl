@@ -3,7 +3,7 @@
     <TheNavbar
       @open-modal="isShowSourceModal = true"
     ></TheNavbar>
-    <div class="container">
+    <div class="container" :class="{ '-inactive': isShowSourceModal }">
       <CommitLog
         class="log"
         v-if="commits"
@@ -141,6 +141,10 @@ export default class App extends Vue {
 
     @media ($sp)
       width: calc(100% - 40px)
+
+  & > .container.-inactive
+    opacity: 0.5
+    transition: opacity 0.12s ease
 
   & > .container > .log
     flex-shrink: 0
