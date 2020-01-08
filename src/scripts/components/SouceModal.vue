@@ -19,7 +19,7 @@
       <a
         v-show="!value"
         class="link"
-        href="https://scrapbox.io/simochee-frontend/ページのコミットログを取得する"
+        href="https://scrapbox.io/lollipop-onl/ページのコミットログを取得する"
         target="_blank"
         rel="noopener"
       >
