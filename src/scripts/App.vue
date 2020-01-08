@@ -16,6 +16,7 @@
       >
         <textarea
           readonly
+          id="sourceField"
           class="field"
           :value="docs"
         ></textareareadonly>

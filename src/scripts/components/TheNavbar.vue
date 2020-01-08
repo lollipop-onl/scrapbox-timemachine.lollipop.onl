@@ -8,6 +8,9 @@
         <button class="menu" @click="openModal">
           Edit Source
         </button>
+        <button class="menu -copy" @click="copySource">
+          Copy Source
+        </button>
         <div class="version">
           v{{version}}
         </div>
@@ -29,6 +32,18 @@ export default class TheNavbar extends Vue {
 
   @Emit()
   openModal(): void {}
+
+  copySource(): void {
+    const $sourceField = document.getElementById('sourceField');
+
+    if (!$sourceField || !($sourceField instanceof HTMLTextAreaElement)) {
+      return;
+    }
+
+    $sourceField.select();
+
+    document.execCommand('copy');
+  }
 }
 </script>
 
@@ -66,7 +81,7 @@ export default class TheNavbar extends Vue {
       display: none
 
   & > .menu
-    margin-right: 12px
+    margin-right: 16px
     font-size: 14px
     font-weight: bold
     color: #39AC86
@@ -76,11 +91,14 @@ export default class TheNavbar extends Vue {
     outline: none
     transition: opacity 0.12s ease
 
+  & > .menu.-copy
+    color: rgba(#ffffff, 0.7)
+
   & > .menu:hover
     opacity: 0.5
 
   & > .version
-    margin-left: 20px
+    margin-left: 8px
     font-size: 12px
     opacity: 0.7
 </style>
