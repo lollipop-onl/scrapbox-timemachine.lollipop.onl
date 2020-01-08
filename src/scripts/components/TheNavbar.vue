@@ -5,12 +5,14 @@
         Scrapbox TimeMachine
       </h1>
       <div class="navbar-menu">
-        <button class="menu" @click="openModal">
-          Edit Source
-        </button>
-        <button class="menu -copy" @click="copySource">
-          Copy Source
-        </button>
+        <template v-if="!sourceEmpty">
+          <button class="menu" @click="openModal">
+            Edit Source
+          </button>
+          <button class="menu -copy" @click="copySource">
+            Copy Source
+          </button>
+        </template>
         <div class="version">
           v{{version}}
         </div>
@@ -20,11 +22,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Vue } from 'vue-property-decorator';
+import { Component, Emit, Prop, Vue } from 'vue-property-decorator';
 import packageJson from '../../../package.json';
 
 @Component
 export default class TheNavbar extends Vue {
+  /** Sourceが空かどうか */
+  @Prop({ type: Boolean, default: false })
+  sourceEmpty: boolean;
+
   /** バージョン */
   get version(): string {
     return packageJson.version;

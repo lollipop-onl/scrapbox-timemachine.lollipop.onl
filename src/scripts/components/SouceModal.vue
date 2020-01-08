@@ -28,10 +28,11 @@
     </div>
     <div class="main">
       <textarea
-        :class="{'source-field': true, '-correct': !!commits}"
+        class="source-field"
+        :class="{ '-correct': !!commits }"
         placeholder='{ "commits": [...] }'
         v-model="localValue"
-      ></textareaclass="source-field">
+      />
     </div>
   </div>
   <div class="background" @click="close"></div>

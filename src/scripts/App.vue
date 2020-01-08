@@ -1,6 +1,7 @@
 <template>
   <div class="page-app">
     <TheNavbar
+      :source-empty="!commits"
       @open-modal="isShowSourceModal = true"
     ></TheNavbar>
     <div class="container" :class="{ '-inactive': isShowSourceModal }">
